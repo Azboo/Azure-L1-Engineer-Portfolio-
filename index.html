@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryaman Azure L1 Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Fira Code', monospace;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    body.light-mode {
+      background-color: #f4f4f4;
+      color: #111;
+    }
+
+    .terminal {
+      background-color: #111;
+      border: 2px solid #00ff00;
+      margin: auto;
+      width: 90%;
+      max-width: 800px;
+      height: 500px;
+      padding: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 10px #00ff00;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .output {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+    }
+
+    .input-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .prompt {
+      margin-right: 5px;
+    }
+
+    .user { color: #4af626; }
+    .host { color: #1ef9ff; }
+
+    #cli-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .output img.profile {
+      display: block;
+      margin-top: 8px;
+      width: 140px;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #00ff00;
+    }
+
+    a {
+      color: #00bfff;
+      text-decoration: underline;
+    }
+
+    #boot-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .header {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header img {
+      height: 35px;
+      border-radius: 5px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      background-color: #00ff00;
+      animation: blink 0.7s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+
+    @media (max-width: 600px) {
+      .terminal {
+        height: 90vh;
+        font-size: 14px;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="icon.jpg" alt="Aryaman Icon" />
+    <span><b><i>Aryaman Azure L1 Engineer</i></b></span>
+  </div>
+
+  <div id="boot-screen">
+    <pre>
+Booting CLI Portfolio...
+Loading modules...
+Initializing terminal...
+Welcome, Aryaman!
+    </pre>
+  </div>
+
+  <div class="terminal">
+    <button class="toggle-theme" id="themeToggle">🌙</button>
+    <div id="output" class="output"></div>
+    <div class="input-line">
+      <span class="prompt"><span class="user">aryaman</span>@<span class="host">cloud</span>:~$</span>
+      <input type="text" id="cli-input" autocomplete="off" autofocus />
+      <span class="cursor"></span>
+    </div>
+  </div>
+
+  <audio id="terminal-sound" src="https://www.myinstants.com/media/sounds/console-click.mp3" preload="auto"></audio>
+
+  <script>
+    const output = document.getElementById("output");
+    const input = document.getElementById("cli-input");
+    const themeToggle = document.getElementById("themeToggle");
+    const sound = document.getElementById("terminal-sound");
+    let history = [], historyIndex = -1, currentPage = 0;
+
+    const projectsList = [
+      "🔹 Hybrid Cloud Storage with Azure + Terraform",
+      "🔹 Load-Balanced Multi-VM Architecture",
+      "🔹 Secure VNet with Force Tunneling & Traffic Manager",
+      "🔹 DevOps Pipeline with GitHub Actions",
+      "🔹 Dockerized Node.js App Deployment"
+    ];
+
+    const commands = {
+      whoami: `Aryaman M Singha - Azure Cloud L1 Engineer ☁️\n<img src='Aryaman Photo.jpeg' alt='Aryaman Profile' class='profile'>`,
+      resume: `> View Resume: <a href='https://drive.google.com/file/d/1joRHuvNHQ65M_xeQx6lL4bI2jjPyCAor/view' target='_blank'>📄 Click here to view my resume</a>`,
+      contact: `📧 <a href='mailto:aryamansingha60@gmail.com' target='_blank'>Email</a>: aryamansingha60@gmail.com\n🌐 <a href='https://www.linkedin.com/in/aryaman-singha-528929220/' target='_blank'>LinkedIn</a>\n🐱 <a href='https://github.com/Aryamnsls' target='_blank'>GitHub</a>\n🐦 <a href='https://x.com/beercodes' target='_blank'>Twitter</a>`,
+      skills: `🧠 Skills:\n- Azure, Terraform, Git, Bash\n- Monitoring, Networking, DevOps\n- Communication, Problem-Solving, Teamwork`,
+      certifications: `📜 Certifications:
+📄 <a href='https://drive.google.com/file/d/19RDwryDXtHiv-TewQbVVGDkOK9gRuHn0/view?usp=sharing' target='_blank'>Solved 500+ Questions on Leetcode</a>
+📄 <a href='https://drive.google.com/file/d/12GR5ab9_mnv01kbn1N_aIN8yslLQmJZ0/view?usp=sharing' target='_blank'>Achieved 365 Days Leetcode Badge</a>
+📄 <a href='https://drive.google.com/file/d/1LbUNV2cBZAC03KpSU2NSfwkPmVV0qgWd/view?usp=sharing' target='_blank'>Published Research in IJFMR</a>
+📄 <a href='https://drive.google.com/file/d/1hM70pJ1_FyWi9aCAhY40VINcDcAaHNwh/view?usp=sharing' target='_blank'>AWS Academy Cloud Foundations</a>
+📄 <a href='https://drive.google.com/file/d/1DKtI0ysjBJVQDMyiI01V7aOZ0N-k7yzJ/view?usp=sharing' target='_blank'>React & Redux (YouTube) - May 2024</a>`,
+      achievements: `🏆 Achievements:\n- AZ-900 Certified\n- Deployed secure infrastructure using IaC\n- Built CLI portfolio from scratch!\n- Cleared GSOC 2023\n- ICPC 2021 Hawai – World Rank: 30,000`,
+      live: `🚀 Live Project Demos:
+🔐 <a href='https://file-storage-fire.vercel.app/' target='_blank'>Securing File Storage by Hybrid Cloud</a>
+💬 <a href='https://demo.chat-sdk.dev/' target='_blank'>Real-Time Chat App using Next.js + GPT-4 Turbo</a>
+☁️ <a href='https://weather-app-using-post-api.vercel.app/' target='_blank'>Weather App using POST API</a>`,
+      projects: () => displayProjects(0),
+      next: () => displayProjects(currentPage + 1),
+      prev: () => displayProjects(currentPage - 1),
+      help: `Available commands:\nwhoami, resume, contact, skills, certifications, achievements, projects, next, prev, live, help, clear`,
+      clear: "clear",
+      sudo: "🔐 Nice try. You're not root.",
+      ping: "pong",
+      joke: "Why did the developer go broke? Because he used up all his cache. 😄"
+    };
+
+    const aliasMap = {
+      linkedin: "contact",
+      github: "contact",
+      email: "contact",
+      download: "resume",
+      cv: "resume",
+      ls: "help"
+    };
+
+    function displayProjects(page) {
+      const itemsPerPage = 2;
+      const totalPages = Math.ceil(projectsList.length / itemsPerPage);
+      if (page < 0 || page >= totalPages) {
+        typeOutput("No more projects to display.");
+        return;
+      }
+      currentPage = page;
+      const projects = projectsList.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+      typeOutput(projects.join("\n") + `\n(Page ${page + 1}/${totalPages})`);
+    }
+
+    function typeOutput(text, container = null) {
+      container = container || output.appendChild(document.createElement("div"));
+
+      // Render hyperlinks or images instantly
+      if (/<a\s|<img\s/i.test(text)) {
+        container.innerHTML = text + '<br>';
+        output.scrollTop = output.scrollHeight;
+        return;
+      }
+
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          container.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+          i++;
+          setTimeout(type, 10);
+        } else {
+          container.innerHTML += '<br>';
+          output.scrollTop = output.scrollHeight;
+        }
+      }
+      type();
+    }
+
+    function handleCommand(cmd) {
+      if (cmd === "") return;
+      const normalizedCmd = cmd.toLowerCase();
+      const actualCommand = aliasMap[normalizedCmd] || normalizedCmd;
+
+      const promptLineEl = document.createElement("div");
+      promptLineEl.innerHTML = `<span class="prompt"><span class="user">aryaman</span>@<span class="host">cloud</span>:~$</span> ${cmd}`;
+      output.appendChild(promptLineEl);
+
+      if (commands[actualCommand] === "clear") {
+        output.innerHTML = "";
+        return;
+      }
+
+      if (typeof commands[actualCommand] === "function") {
+        commands[actualCommand]();
+      } else if (commands[actualCommand]) {
+        typeOutput(commands[actualCommand]);
+      } else {
+        typeOutput(`Command not found: ${cmd}. Type 'help' to explore.`);
+      }
+
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        history.push(cmd);
+        historyIndex = history.length;
+        handleCommand(cmd);
+        input.value = "";
+      } else if (e.key === "ArrowUp") {
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+        }
+      } else if (e.key === "ArrowDown") {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          input.value = history[historyIndex];
+        } else {
+          input.value = "";
+        }
+      }
+    });
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      themeToggle.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+    });
+
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("boot-screen").style.display = "none";
+        typeOutput("Welcome to Aryaman's CLI 🌐\nType 'help' to explore");
+      }, 2500);
+    };
+  </script>
+</body>
+</html>
